@@ -1,6 +1,6 @@
 # Elastic stack (ELK) on Docker
 
-[![Elastic Stack version](https://img.shields.io/badge/Elastic%20Stack-7.11.0-00bfb3?style=flat&logo=elastic-stack)](https://www.elastic.co/blog/category/releases)
+[![Elastic Stack version](https://img.shields.io/badge/Elastic%20Stack-8.0.0--SNAPSHOT-00bfb3?style=flat&logo=elastic-stack)](https://www.elastic.co/blog/category/releases)
 [![Build Status](https://github.com/deviantony/docker-elk/workflows/CI/badge.svg?branch=main)](https://github.com/deviantony/docker-elk/actions?query=workflow%3ACI+branch%3Amain)
 [![Join the chat at https://gitter.im/deviantony/docker-elk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/deviantony/docker-elk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -22,7 +22,7 @@ Based on the official Docker images from Elastic:
 
 Other available stack variants:
 
-* [`tls`](https://github.com/deviantony/docker-elk/tree/tls): TLS encryption enabled in Elasticsearch.
+* [`tls`](https://github.com/deviantony/docker-elk/tree/tls): TLS encryption enabled in Elasticsearch
 * [`searchguard`](https://github.com/deviantony/docker-elk/tree/searchguard): Search Guard support
 
 ---
@@ -122,7 +122,7 @@ exclusively. Make sure the repository is cloned in one of those locations or fol
 ### Version selection
 
 This repository tries to stay aligned with the latest version of the Elastic stack. The `main` branch tracks the current
-major version (7.x).
+major version (8.x).
 
 To use a different version of the core Elastic components, simply change the version number inside the `.env` file. If
 you are upgrading an existing stack, please carefully read the note in the next section.
@@ -132,6 +132,7 @@ performing a stack upgrade.**
 
 Older major versions are also supported on separate branches:
 
+* [`release-7.x`](https://github.com/deviantony/docker-elk/tree/release-7.x): 7.x series
 * [`release-6.x`](https://github.com/deviantony/docker-elk/tree/release-6.x): 6.x series
 * [`release-5.x`](https://github.com/deviantony/docker-elk/tree/release-5.x): 5.x series (End-Of-Life)
 
@@ -189,9 +190,9 @@ users][builtin-users] instead for increased security.
 
 1. Replace usernames and passwords in configuration files
 
-    Use the `kibana_system` user (`kibana` for releases <7.8.0) inside the Kibana configuration file
-    (`kibana/config/kibana.yml`) and the `logstash_system` user inside the Logstash configuration file
-    (`logstash/config/logstash.yml`) in place of the existing `elastic` user.
+    Use the `kibana_system` user inside the Kibana configuration file (`kibana/config/kibana.yml`) and the
+    `logstash_system` user inside the Logstash configuration file (`logstash/config/logstash.yml`) in place of the
+    existing `elastic` user.
 
     Replace the password for the `elastic` user inside the Logstash pipeline file (`logstash/pipeline/logstash.conf`).
 
@@ -256,7 +257,7 @@ Create an index pattern via the Kibana API:
 ```console
 $ curl -XPOST -D- 'http://localhost:5601/api/saved_objects/index-pattern' \
     -H 'Content-Type: application/json' \
-    -H 'kbn-version: 7.11.0' \
+    -H 'kbn-version: 8.0.0-SNAPSHOT' \
     -u elastic:<your generated elastic password> \
     -d '{"attributes":{"title":"logstash-*","timeFieldName":"@timestamp"}}'
 ```
